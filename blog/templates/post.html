@@ -1,0 +1,60 @@
+{% extends "./base.html" %}
+
+{% block head %}
+  <title>Account</title>
+{% endblock head %}
+
+{% block content %}
+<section style="padding: 20px;">
+  <ul class="list-group list-group-flush">
+
+ 
+    
+      <li class="list-group-item p-3 container">
+ <div class="text-center">
+{% if post.author == current_user %}
+  <div>
+    <a href="{{url_for('update_post', post_id=post.id)}}" class="btn btn-secondary btn-sm m-1">Update post</a>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Delete post
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Post?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Are you sure you want to delete this post?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+<form action="{{url_for('delete_post', post_id=post.id)}}" method="POST">
+  <input type="submit" class="btn btn-danger btn-sm m-1" value="Delete post">
+</form>
+       
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+{% endif %}
+
+  <img src="{{url_for('static', filename='profile_pic' + post.author.image_file)}}" class="rounded-circle article-img img-fluid text-center"  style="height: 40px; width:40px;" alt="">
+  <small class="text-muted text-center">{{post.author.username}}</small>
+ </div> 
+        <h2 class="text-center">{{post.title}}</h2> <br>
+        <p style="font-size: 16px;" class="lead text-center">{{post.content}}</p>
+   
+    
+    </li>
+ 
+      
+    </ul>
+</section>
+{% endblock content %}
