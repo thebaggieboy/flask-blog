@@ -19,7 +19,7 @@
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
  Delete post
 </button>
-
+<br>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -45,8 +45,8 @@
   </div>
 {% endif %}
 
-  <img src="{{url_for('static', filename='profile_pic' + post.author.image_file)}}" class="rounded-circle article-img img-fluid text-center"  style="height: 40px; width:40px;" alt="">
-  <small class="text-muted text-center">{{post.author.username}}</small>
+  <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid text-center"  style="height: 40px; width:40px;" alt="">
+  <small class="text-muted text-center">{{post.author.username}}</small> <hr>
  </div> 
         <h2 class="text-center">{{post.title}}</h2> <br>
         <p style="font-size: 16px;" class="lead text-center">{{post.content}}</p>
