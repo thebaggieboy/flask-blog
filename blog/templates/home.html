@@ -20,7 +20,6 @@
         {% for post in posts.items  %}
        
         <li class="list-group-item p-3 container">
-         
           <div class="container p-2">
             <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt="">
             <small class="text-muted">{{post.author.username}}</small> <br>
@@ -33,15 +32,18 @@
               text-overflow: ellipsis;
               max-width: 13ch;">
            {{post.content}}
+            <br>
           </div>
          <hr>
-        
-
-      
       </li>
+      {% endfor %}
         
     </ul>
-        {% endfor %}
+        {% else %}
+        <p class="lead text-dark text-center">No posts added yet, create new posts</p>
+        {% endif %}
+  
+    
 
     <div class="container d-flex justify-content-center space-left2">
       {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
@@ -58,14 +60,11 @@
       {% endif %}
     
       {% else %}
-    ...
+         ...
       {% endif %}
     {% endfor %}
     </div>
-      {% else %}
-      <p class="lead text-center">No posts added yet, create new posts</p>
-      {% endif %}
-
+  
        
       
 </section>

@@ -5,11 +5,13 @@
 {% endblock head %}
 
 {% block content %}
-  <main style="padding: 10px; padding-left: 120px;">
+  <main style="padding: 10px;">
      <div class="content-section">
-       <div class="media">
-         <img src="{{image_file}}"  style="height: 125px;width: 125px;" alt="cant display image" class="rounded-circle account-img img-fluid">
-         <div class="media-body">
+       <div class="media container">
+     
+         <div style="padding: 10px;" class="media-body ">
+          <img src="{{image_file}}"  style="height: 80px;width: 80px;" alt="cant display image" class="rounded-circle account-img img-fluid"> <br>
+
            <h2 class="account-heading">{{current_user.username}}</h2>
            <p class="text-secondary">{{current_user.email}}</p>
          </div>
@@ -27,7 +29,7 @@
           {{form.username.label(class="form-control-label")}}
 
           {% if form.username.errors %}
-            {{form.username(class='form-control form-control-lg is-invalid')}}
+            {{form.username(class='form-control form-control-sm is-invalid')}}
             <div class="invalid-feedback">
               {% for error in form.username.errors  %}
                 <span>{{error}}</span>
@@ -45,20 +47,20 @@
           {{form.email.label(class="form-control-label")}}
 
           {% if form.email.errors %}
-            {{form.email(class='form-control form-control-lg is-invalid')}}
+            {{form.email(class='form-control form-control-sm is-invalid')}}
             <div class="invalid-feedback">
               {% for error in form.email.errors  %}
                 <span>{{error}}</span>
               {% endfor %}
             </div>
           {% else %}
-          {{form.email(class="form-control form-control-lg")}}
+          {{form.email(class="form-control form-control-sm")}}
           {% endif %}
 
           
 
-        </div> <br>
-        <div class="form-group">
+        </div> <br> <br>
+        <div class="form-group p-2">
           {{form.profile_picture.label()}}
           {{form.profile_picture(class="form-control-file")}}
 
@@ -69,9 +71,9 @@
           {% endif %}
 
         </div>
-
+ <br>
         <div class="form-group">
-          {{form.submit(class="btn btn-outline-info")}}
+          {{form.submit(class="btn btn-outline-info btn-lg")}}
         </div>
       </fieldset>
     </form>
