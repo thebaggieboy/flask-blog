@@ -19,7 +19,8 @@
         <li class="list-group-item p-3 container">
          
           <div class="container p-3 ml-5">
-
+            <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt="">
+            <small class="text-muted">{{post.author.username}}</small>
           </div>
          
           <br>
