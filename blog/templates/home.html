@@ -12,28 +12,31 @@
 {% block content %}
 
 <section>
-    <ul class="list-group list-group-flush">
+  
+
+    <ul class="list-group list-group-flush ml-2">
 
       {% if posts %}
         {% for post in posts.items  %}
+       
         <li class="list-group-item p-3 container">
          
-          <div class="container p-3 ml-5">
+          <div class="container p-2">
             <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt="">
-            <small class="text-muted">{{post.author.username}}</small>
+            <small class="text-muted">{{post.author.username}}</small> <br>
+            <br>
+            <h3><a class="text-dark" href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
+            <p style="font-size: 14px;" id="content" class="content lead"> <span style="
+              display:inline-block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 13ch;">
+           {{post.content}}
           </div>
-         
-          <br>
-          <h3><a class="text-dark" href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
-          <p style="font-size: 14px;" id="content" class="content lead"> <span style="
-            display:inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 13ch;">
-         {{post.content}}
-          </span></p>
-          <!--<a href="{{url_for('post', post_id=post.id)}}" class="btn btn-outline-dark">Continue reading</a> !-->
+         <hr>
+        
+
       
       </li>
         
