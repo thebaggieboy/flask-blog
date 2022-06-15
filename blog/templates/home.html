@@ -17,8 +17,12 @@
       {% if posts %}
         {% for post in posts.items  %}
         <li class="list-group-item p-3 container">
-          <img src="{{url_for('static', filename='profile_pic' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt="">
-          <small class="text-muted">{{post.author.username}}</small> <br>
+         
+          <div class="container p-3 ml-5">
+
+          </div>
+         
+          <br>
           <h3><a class="text-dark" href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
           <p style="font-size: 14px;" id="content" class="content lead"> <span style="
             display:inline-block;
