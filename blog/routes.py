@@ -7,7 +7,7 @@ from blog.models import User, Post
 from blog import app, db, bcrypt
 from flask_login import login_required, login_user, current_user, logout_user, login_required
 import secrets
-
+from passlib.hash import pbkdf2_sha256
 @app.route('/')
 def home():
     page = request.args.get('page', 1, type=int)
@@ -22,12 +22,16 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8', 'ignore')
+        #hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_password = form.password.data
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash(f'Account created for {form.email.data} you are now able to log in', 'success')
-        return redirect(url_for("login"))
+        if user:
+            db.session.add(user)
+            db.session.commit()
+            flash(f'Account created for {form.email.data} you are now able to log in', 'success')
+            return redirect(url_for("login"))
+        else:
+            flash(f'There is a user with that account', 'danger')
 
     return render_template('register.html', title='Register', form=form)
 
