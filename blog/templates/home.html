@@ -22,7 +22,7 @@
         <li class="list-group-item p-3 container">
           <div class="container p-2">
             <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt="">
-            <small class="text-muted">Posted by {{post.author.username}}</small> <br>
+            <small class="text-muted">Posted by <a href="{{url_for('account')}}" style="text-decoration: none;">{{post.author.username}}</a></small> <br>
             <h3><a class="text-dark" href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
             <p style="font-size: 14px;" id="content" class="content lead"> <span style="
               display:inline-block;
