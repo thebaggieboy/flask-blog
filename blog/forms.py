@@ -7,8 +7,8 @@ from blog.models import User
 from flask_login import current_user
 
 class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
+    title = StringField('Title',   validators=[DataRequired()])
+    content = TextAreaField('Content', render_kw={'rows': 50}, validators=[DataRequired()])
     submit = SubmitField('Post')
 
 class RegistrationForm(FlaskForm):
