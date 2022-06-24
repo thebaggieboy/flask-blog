@@ -30,9 +30,7 @@ def register():
             db.session.commit()
             flash(f'Account created for {form.email.data} you are now able to log in', 'success')
             return redirect(url_for("login"))
-        else:
-            flash(f'There is a user with that account', 'danger')
-
+     
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/login',  methods=['GET', 'POST'])
