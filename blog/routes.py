@@ -8,6 +8,15 @@ from blog import app, db, bcrypt
 from flask_login import login_required, login_user, current_user, logout_user, login_required
 import secrets
 from passlib.hash import pbkdf2_sha256
+import boto3
+
+
+UPLOAD_FOLDER = 'uploads'
+BUCKET = 'tbb-blog'
+
+
+
+
 @app.route('/')
 def home():
     page = request.args.get('page', 1, type=int)
@@ -53,6 +62,14 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def upload_file(file_name, bucket):
+    object_name = file_name
+    s3_client = boto3.client('s3')
+    response = s3_client.upload_file(file_name, bucket, object_name)
+    return response
+
+
+
 def save_profile_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -63,6 +80,8 @@ def save_profile_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
+    #do this
+    upload_file(f"{picture_path}", BUCKET)
     return picture_fn
 
 
