@@ -5,10 +5,10 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from blog.models import User
 from flask_login import current_user
-
+from flask_ckeditor import CKEditorField
 class PostForm(FlaskForm):
     title = StringField('Title',   validators=[DataRequired()])
-    content = TextAreaField('Content', render_kw={'rows': 10}, validators=[DataRequired()])
+    content = CKEditorField('Content', render_kw={'rows': 10}, validators=[DataRequired()])
     submit = SubmitField('Post')
 
 class RegistrationForm(FlaskForm):

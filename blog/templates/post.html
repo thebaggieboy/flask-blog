@@ -13,6 +13,8 @@
       <li class="list-group-item p-3 container">
  <div class="text-center">
 {% if post.author == current_user %}
+<img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid text-center"  style="height: 40px; width:40px;" alt="">
+<small class="text-muted text-center">{{post.author.username}}</small>  <br> <br>
   <div>
     <a href="{{url_for('update_post', post_id=post.id)}}" class="btn btn-secondary btn-sm m-1">Update post</a>
     <!-- Button trigger modal -->
@@ -45,11 +47,10 @@
   </div>
 {% endif %}
 
-  <img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid text-center"  style="height: 40px; width:40px;" alt="">
-  <small class="text-muted text-center">{{post.author.username}}</small> <hr>
+
  </div> 
-        <h2 class="text-center">{{post.title}}</h2> <br>
-        <p style="font-size: 16px;" class="lead text-center">{{post.content}}</p>
+        <h1 class="text-center">{{post.title}}</h1> <br>
+        <p style="font-size: 16px;" class="lead text-center">{{post.content | safe}}</p>
    
     
     </li>

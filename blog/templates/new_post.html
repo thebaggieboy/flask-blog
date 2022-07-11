@@ -42,7 +42,7 @@
                   {% endfor %}
                 </div>
               {% else %}
-              {{form.content(class="form-control form-control-lg")}}
+              {{form.content(class="form-control form-control-lg") | safe}}
               {% endif %}
     
               
@@ -55,6 +55,9 @@
             </div>
           </fieldset>
         </form>
+
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name='content') }}
       </div>
   </main>
 {% endblock content %}
