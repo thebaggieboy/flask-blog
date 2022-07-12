@@ -22,7 +22,7 @@
       
           <div class="container p-3">
 
-            <small class="text-muted"><img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt=""> <a href="{{url_for('account')}}" style="text-decoration: none;">{{post.author.username}}</a></small><br><br>
+            <small class="text-muted"><img src="{{url_for('static', filename='profile_pic/' + post.author.image_file)}}" class="rounded-circle article-img img-fluid" style="height: 40px; width:40px;" alt=""> <a href="{{url_for('account')}}" style="text-decoration: none;">{{post.author.username}}</a></small><br>
             <h4><a class="text-dark" style="text-decoration: none;" href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h4>
            
        
