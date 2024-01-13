@@ -8,7 +8,7 @@ from blog import app, db, bcrypt
 from flask_login import login_required, login_user, current_user, logout_user, login_required
 import secrets
 from passlib.hash import pbkdf2_sha256
-import boto3
+
 
 
 UPLOAD_FOLDER = 'uploads'
