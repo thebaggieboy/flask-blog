@@ -15,8 +15,6 @@ UPLOAD_FOLDER = 'uploads'
 BUCKET = 'tbb-blog'
 
 
-
-
 @app.route('/')
 def home():
     page = request.args.get('page', 1, type=int)

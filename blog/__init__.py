@@ -12,7 +12,7 @@ ckeditor = CKEditor(app)
 
 app.config['DEBUG']=True
 app.config['SECRET_KEY'] = '50d86ec193def31d8d172e2d2685f6dc'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://blog_gkbe_user:zgEhxfI43CRgcEAWmcSPSnnN58bLfHUV@dpg-cmd42a7109ks7394s370-a.oregon-postgres.render.com/blog_gkbe'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://blog_hsmh_user:N77jBj6mrYbP3PYfntacjIG9J9K3t1SV@dpg-cprhilrqf0us738fhfs0-a.oregon-postgres.render.com/blog_hsmh'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
