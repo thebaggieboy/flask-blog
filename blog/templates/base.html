@@ -11262,11 +11262,11 @@ header.masthead .site-heading .h1 {
   </head>
   <body class="">
     
-    <nav class="navbar navbar-expand-lg navbar-light float p-3 text-dark">
+  <nav class="navbar navbar-expand-lg mx-auto float p-3 text-primary" style="background-color:black; color:white; text-align:center">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/" style="font-size: 16px; font-weight: bold;">baggieboy</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <a class="navbar-brand" href="/" style="font-size: 16px; font-weight: bold; color:white">Baggieboy</a>
+        <button style="background-color:white" class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon text-dark" style="color:white"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-5">
@@ -11274,31 +11274,31 @@ header.masthead .site-heading .h1 {
             {% if current_user.is_authenticated %}
               
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" style="font-size: 14px;" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" style="font-size: 14px; margin-left:10; color:white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Post
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" style="font-size: 14px;" href="{{url_for('new_post')}}">Create new post</a></li>
-                <li><a class="dropdown-item" style="font-size: 14px;"  href="{{url_for('home')}}">View Posts</a></li>
+                <li><a class="dropdown-item" style="font-size: 14px; margin-left:10; color:white" href="{{url_for('new_post')}}">Create new post</a></li>
+                <li><a class="dropdown-item" style="font-size: 14px; margin-left:10; color:white"  href="{{url_for('home')}}">View Posts</a></li>
 
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px;" href="{{url_for('account')}}">Account</a>
+              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('account')}}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " style="font-size: 14px;" aria-current="page" href="{{url_for('logout')}}">Logout</a>
+              <a class="nav-link " style="font-size: 14px; margin-left:10; color:white;" aria-current="page" href="{{url_for('logout')}}">Logout</a>
             </li>
             
             {% else %}
             <li class="nav-item">
-              <a class="nav-link " style="font-size: 14px;" aria-current="page" href="{{url_for('home')}}">Home</a>
+              <a class="nav-link " style="font-size: 14px; margin-left:10; color:white;" aria-current="page" href="{{url_for('home')}}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px;" href="{{url_for('login')}}">Login</a>
+              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('login')}}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px;" href="{{url_for('register')}}">Register</a>
+              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('register')}}">Register</a>
             </li>
             {% endif %}
 
