@@ -1,78 +1,236 @@
 {% extends "./base.html" %}
 
 {% block head %}
-  <style>
-    .hidden { display: none;}
-.readmore { margin: 0 5px;}
+<title>The Baggie Blog — Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Page wrapper ── */
+  .posts-section {
+    padding: 3rem 0 5rem;
+    min-height: 60vh;
+  }
 
+  /* ── Post card ── */
+  .post-card {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+    transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .post-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #0085A1, #00c6e0);
+    border-radius: 14px 0 0 14px;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+  .post-card:hover {
+    box-shadow: 0 8px 32px rgba(0,133,161,0.13);
+    transform: translateY(-3px);
+    border-color: #0085A1;
+  }
+  .post-card:hover::before { opacity: 1; }
 
-  </style>
+  .post-card__title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    display: block;
+    line-height: 1.35;
+    transition: color 0.18s;
+  }
+  .post-card__title:hover { color: #0085A1; }
+
+  .post-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
+  .post-card__avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0085A1, #00c6e0);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .post-card__author {
+    font-size: 0.88rem;
+    color: #495057;
+    font-family: 'Inter', sans-serif;
+  }
+  .post-card__author a {
+    color: #0085A1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .post-card__author a:hover { text-decoration: underline; }
+
+  .post-card__read-btn {
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0085A1;
+    border: 1.5px solid #0085A1;
+    border-radius: 20px;
+    padding: 0.28rem 0.85rem;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .post-card__read-btn:hover {
+    background: #0085A1;
+    color: #fff;
+  }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center;
+    padding: 5rem 1rem;
+  }
+  .empty-state__icon {
+    font-size: 4rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    opacity: 0.45;
+  }
+  .empty-state__title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 0.6rem;
+  }
+  .empty-state__sub {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .empty-state__cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #0085A1, #00c6e0);
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,133,161,0.25);
+    transition: opacity 0.18s, transform 0.18s;
+  }
+  .empty-state__cta:hover { opacity: 0.9; transform: translateY(-2px); color: #fff; }
+
+  /* ── Pagination ── */
+  .pagination-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 2.5rem;
+  }
+  .pagination-bar a {
+    min-width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+    border: 1.5px solid #0085A1;
+  }
+  .pagination-bar a.active {
+    background: #0085A1;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0,133,161,0.22);
+  }
+  .pagination-bar a:not(.active) {
+    color: #0085A1;
+    background: #fff;
+  }
+  .pagination-bar a:not(.active):hover {
+    background: #e8f7fa;
+  }
+  .pagination-bar .ellipsis {
+    min-width: 38px; height: 38px;
+    display: flex; align-items: flex-end; justify-content: center;
+    color: #adb5bd;
+    font-size: 1.1rem;
+    padding-bottom: 4px;
+  }
+</style>
 {% endblock head %}
 
 {% block content %}
+<section class="posts-section">
+  <div class="container px-4 px-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
 
-<section>
-  
+        {% if posts and posts.items %}
 
-    <ul class="list-group list-group-flush ml-2">
-
-      {% if posts %}
-        {% for post in posts.items  %}
-        <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-md-10 col-lg-8 col-xl-7">
-                  <!-- Post preview-->
-                  <div class="post-preview">
-                      <a href="{{url_for('post', post_id=post.id)}}">
-                          <h2 class="post-title">{{post.title}}</h2>
-
-                      </a>
-                      <p class="post-meta">
-                          Posted by
-                          <a href="#!">{{post.author.username}}</a>
-                        
-                      </p>
-                  </div>
-                  <!-- Divider-->
-                  <hr class="my-4" />
-
-                  <!-- Pager-->
-                  <div class="d-flex justify-content-end mb-4"></div>
-              </div>
+          {% for post in posts.items %}
+          <div class="post-card">
+            <a href="{{ url_for('post', post_id=post.id) }}" class="post-card__title">
+              {{ post.title }}
+            </a>
+            <div class="post-card__meta">
+              <div class="post-card__avatar">{{ post.author.username[0].upper() }}</div>
+              <span class="post-card__author">By <a href="#!">{{ post.author.username }}</a></span>
+              <a href="{{ url_for('post', post_id=post.id) }}" class="post-card__read-btn">Read →</a>
+            </div>
           </div>
-      </div>
-      
- 
-      {% endfor %}
-        
-    </ul>
+          {% endfor %}
+
+          <!-- Pagination -->
+          <div class="pagination-bar">
+            {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+              {% if page_num %}
+                <a href="{{ url_for('home', page=page_num) }}"
+                   class="{% if posts.page == page_num %}active{% endif %}">
+                  {{ page_num }}
+                </a>
+              {% else %}
+                <span class="ellipsis">…</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+
         {% else %}
-        <p class="lead text-dark text-center">No posts added yet, create new posts</p>
+
+          <!-- Empty state -->
+          <div class="empty-state">
+            <span class="empty-state__icon">✍️</span>
+            <h2 class="empty-state__title">No posts yet</h2>
+            <p class="empty-state__sub">Be the first to share something with the world.</p>
+            {% if current_user.is_authenticated %}
+              <a href="{{ url_for('new_post') }}" class="empty-state__cta">Write your first post</a>
+            {% else %}
+              <a href="{{ url_for('login') }}" class="empty-state__cta">Log in to post</a>
+            {% endif %}
+          </div>
+
         {% endif %}
-  
-    
 
-    <div class="container d-flex justify-content-center space-left2">
-      {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-      {% if page_num %}
-
-      {% if posts.page == page_num %}
-
-      
-      <a href="{{url_for('home', page=page_num)}}"  class="btn btn-info mb-4 ml-4 btn-sm btn-block"><span>{{page_num}}</span></a>
-       
-      {% else %}
-      <a href="{{url_for('home', page=page_num)}}"  class="btn btn-outline-info mb-4 ml-4 btn-sm btn-block"><span>{{page_num}}</span></a>
-       
-      {% endif %}
-    
-      {% else %}
-         ...
-      {% endif %}
-    {% endfor %}
+      </div>
     </div>
-  
-       
-      
+  </div>
 </section>
 {% endblock content %}
