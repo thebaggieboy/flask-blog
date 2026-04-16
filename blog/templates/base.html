@@ -11262,48 +11262,43 @@ header.masthead .site-heading .h1 {
   </head>
   <body class="">
     
-  <nav class="navbar navbar-expand-lg mx-auto float p-3 text-primary" style="background-color:black; color:white; text-align:center">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/" style="font-size: 16px; font-weight: bold; color:white">Baggieboy</a>
-        <button style="background-color:white" class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon text-dark" style="color:white"></span>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold fs-4 text-primary" href="{{ url_for('home') }}">Baggieboy</a>
+        <button class="navbar-toggler border-0 shadow-none px-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-5">
-
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="{{ url_for('home') }}">Posts</a>
+            </li>
+          </ul>
+          
+          <ul class="navbar-nav ms-auto align-items-lg-center">
             {% if current_user.is_authenticated %}
-              
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" style="font-size: 14px; margin-left:10; color:white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Post
+              <a class="nav-link dropdown-toggle fw-semibold" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Account
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"style="font-size: 14px; margin-left:10; color:white">
-                <li><a class="dropdown-item" style="font-size: 14px; margin-left:10; color:black" href="{{url_for('new_post')}}">Create new post</a></li>
-                <li><a class="dropdown-item" style="font-size: 14px; margin-left:10; color:black"  href="{{url_for('home')}}">View Posts</a></li>
-
+              <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2 rounded-3" aria-labelledby="accountMenu">
+                <li><a class="dropdown-item py-2" href="{{ url_for('new_post') }}">Create New Post</a></li>
+                <li><a class="dropdown-item py-2" href="{{ url_for('account') }}">Profile Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item py-2 text-danger" href="{{ url_for('logout') }}">Logout</a></li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('account')}}">Account</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " style="font-size: 14px; margin-left:10; color:white;" aria-current="page" href="{{url_for('logout')}}">Logout</a>
-            </li>
-            
             {% else %}
-            <li class="nav-item">
-              <a class="nav-link " style="font-size: 14px; margin-left:10; color:white;" aria-current="page" href="{{url_for('home')}}">Home</a>
+            <li class="nav-item me-lg-3 mb-2 mb-lg-0">
+              <a class="nav-link fw-semibold" href="{{ url_for('login') }}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('login')}}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="font-size: 14px; margin-left:10; color:white;" href="{{url_for('register')}}">Register</a>
+              <a class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm w-100" href="{{ url_for('register') }}">Join Now</a>
             </li>
             {% endif %}
-
-           
-          
           </ul>
         </div>
       </div>
