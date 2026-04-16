@@ -1,80 +1,102 @@
 {% extends "./base.html" %}
 
 {% block head %}
-  <title>Account</title>
+  <title>Account Settings</title>
 {% endblock head %}
 
 {% block content %}
-  <main style="padding: 10px;">
-     <div class="content-section">
-       <div class="media container">
-     
-         <div style="padding: 10px;" class="media-body ">
-          <img src="{{image_file}}"  style="height: 80px;width: 80px;" alt="cant display image" class="rounded-circle account-img img-fluid"> <br>
-
-           <h2 class="account-heading">{{current_user.username}}</h2>
-           <p class="text-secondary">{{current_user.email}}</p>
-         </div>
-       </div>
-       
-     </div>
-  </main>
-  <div class="container" style="padding: 10px;">
-    <form action="" method="POST" enctype="multipart/form-data">
-      {{ form.hidden_tag() }}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Account Information</legend>
-        <div class="form-group">
-
-          {{form.username.label(class="form-control-label")}}
-
-          {% if form.username.errors %}
-            {{form.username(class='form-control form-control-sm is-invalid')}}
-            <div class="invalid-feedback">
-              {% for error in form.username.errors  %}
-                <span>{{error}}</span>
-              {% endfor %}
-            </div>
-          {% else %}
-          {{form.username(class="form-control form-control-lg")}}
-          {% endif %}
-
-          
-
-        </div> <br>
-        <div class="form-group">
-
-          {{form.email.label(class="form-control-label")}}
-
-          {% if form.email.errors %}
-            {{form.email(class='form-control form-control-sm is-invalid')}}
-            <div class="invalid-feedback">
-              {% for error in form.email.errors  %}
-                <span>{{error}}</span>
-              {% endfor %}
-            </div>
-          {% else %}
-          {{form.email(class="form-control form-control-sm")}}
-          {% endif %}
-
-          
-
-        </div> <br> <br>
-        <div class="form-group p-2">
-          {{form.profile_picture.label()}}
-          {{form.profile_picture(class="form-control-file")}}
-
-          {% if form.profile_picture.errors %}
-          {% for error in form.profile_picture.errors  %}
-          <span class="text-danger">{{error}}</span>
-        {% endfor %}
-          {% endif %}
-
+<div class="container py-5 mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      
+      <!-- Profile Header Card -->
+      <div class="card shadow-sm border-0 rounded-4 mb-4" style="background: linear-gradient(145deg, #ffffff, #f8f9fa);">
+        <div class="card-body p-4 d-flex align-items-center">
+          <div class="position-relative">
+            <img src="{{ image_file }}" alt="User profile picture" class="rounded-circle shadow-sm border border-4 border-white me-4" style="height: 110px; width: 110px; object-fit: cover;">
+          </div>
+          <div>
+            <h2 class="fw-bold mb-1" style="color: var(--bs-primary);">{{ current_user.username }}</h2>
+            <p class="text-secondary mb-0 fs-6 fw-medium">{{ current_user.email }}</p>
+          </div>
         </div>
-        <div class="form-group">
-          {{form.submit(class="btn btn-outline-info btn-lg")}}
+      </div>
+
+      <!-- Update Info Card -->
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-white border-0 pt-4 pb-2 px-4 mt-2">
+          <h4 class="mb-0 fw-bold">Account Information</h4>
+          <p class="text-muted small">Update your profile details and preferences below</p>
         </div>
-      </fieldset>
-    </form>
+        <div class="card-body p-4 pt-3">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  {% if form.username.errors %}
+                    {{ form.username(class='form-control is-invalid', placeholder='Username') }}
+                    <label for="{{ form.username.id }}">{{ form.username.label.text }}</label>
+                    <div class="invalid-feedback px-2">
+                      {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.username(class='form-control', placeholder='Username') }}
+                    <label for="{{ form.username.id }}">{{ form.username.label.text }}</label>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  {% if form.email.errors %}
+                    {{ form.email(class='form-control is-invalid', placeholder='name@example.com') }}
+                    <label for="{{ form.email.id }}">{{ form.email.label.text }}</label>
+                    <div class="invalid-feedback px-2">
+                      {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.email(class='form-control', placeholder='name@example.com') }}
+                    <label for="{{ form.email.id }}">{{ form.email.label.text }}</label>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Picture Upload Area -->
+            <div class="mb-4 p-4 bg-light rounded-4 border border-1 shadow-sm">
+              <label for="{{ form.profile_picture.id }}" class="form-label fw-bold text-secondary mb-2 d-block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cloud-arrow-up me-2 mb-1" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
+                  <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                </svg>
+                {{ form.profile_picture.label.text }}
+              </label>
+              {{ form.profile_picture(class="form-control") }}
+              {% if form.profile_picture.errors %}
+                <div class="d-block text-danger small mt-2 fw-medium">
+                  {% for error in form.profile_picture.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <div class="form-text mt-2 small text-muted">Upload a lovely square image (JPG, PNG) for best results.</div>
+            </div>
+
+            <div class="d-grid mt-4 mb-2">
+              {{ form.submit(class="btn btn-primary btn-lg fw-bold rounded-pill shadow-sm py-3", value="Save Changes") }}
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      
+    </div>
   </div>
+</div>
 {% endblock content %}

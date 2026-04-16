@@ -1,63 +1,63 @@
 {% extends "./base.html" %}
 
 {% block head %}
-  <title>Account</title>
+  <title>{{ legend }}</title>
 {% endblock head %}
 
 {% block content %}
-  <main>
-    
-      <div class="container" style="padding: 10px;">
-        <form action="" method="POST" enctype="multipart/form-data">
-          {{ form.hidden_tag() }}
-          <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{legend}}</legend>
-            <div class="form-group">
-    
-              {{form.title.label(class="form-control-label")}}
-    
+<div class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-white border-0 pt-4 pb-2 px-4 mt-2">
+          <h3 class="mb-0 fw-bold" style="color: var(--bs-primary);">{{ legend }}</h3>
+          <p class="text-muted small">Share your thoughts with the world</p>
+        </div>
+        <div class="card-body p-4 p-sm-5 pt-3">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-floating mb-4">
               {% if form.title.errors %}
-                {{form.title(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
-                  {% for error in form.title.errors  %}
-                    <span>{{error}}</span>
+                {{ form.title(class='form-control is-invalid', placeholder='Post Title') }}
+                <label for="{{ form.title.id }}">{{ form.title.label.text }}</label>
+                <div class="invalid-feedback px-2">
+                  {% for error in form.title.errors %}
+                    <span>{{ error }}</span>
                   {% endfor %}
                 </div>
               {% else %}
-              {{form.title(class="form-control form-control-lg")}}
+                {{ form.title(class='form-control', placeholder='Post Title') }}
+                <label for="{{ form.title.id }}">{{ form.title.label.text }}</label>
               {% endif %}
-    
-              
-    
-            </div> <br>
-            <div class="form-group">
-    
-              {{form.content.label(class="form-control-label")}}
-    
-              {% if form.content.errors %}
-                {{form.content(class='form-control form-control-lg is-invalid' )}}
-                <div class="invalid-feedback">
-                  {% for error in form.content.errors  %}
-                    <span>{{error}}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-              {{form.content(class="form-control form-control-lg") | safe}}
-              {% endif %}
-    
-              
-    
-            </div> <br>
-           
-    
-            <div class="form-group">
-              {{form.submit(class="btn btn-outline-info")}}
             </div>
-          </fieldset>
-        </form>
 
-        {{ ckeditor.load() }}
-        {{ ckeditor.config(name='content') }}
+            <div class="mb-4">
+              <label for="{{ form.content.id }}" class="form-label fw-bold text-secondary mb-2">{{ form.content.label.text }}</label>
+              {% if form.content.errors %}
+                {{ form.content(class='form-control is-invalid', rows="12") }}
+                <div class="invalid-feedback px-2">
+                  {% for error in form.content.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.content(class='form-control', rows="12") | safe }}
+              {% endif %}
+            </div>
+
+            <div class="d-grid mt-5 mb-2">
+              {{ form.submit(class="btn btn-primary btn-lg fw-bold rounded-pill shadow-sm py-3") }}
+            </div>
+          </form>
+        </div>
       </div>
-  </main>
+
+      {{ ckeditor.load() }}
+      {{ ckeditor.config(name='content') }}
+      
+    </div>
+  </div>
+</div>
 {% endblock content %}
